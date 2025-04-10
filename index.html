@@ -21,11 +21,26 @@
 
     <p id="divisarray"></p>
 
-    <p>Foreach method</p>
+    <p>forEach method</p>
     <p id="foreachm"></p>
 
-    <p>Array Map</p>
+    <p>Array Map with double value</p>
     <p id="arraymap"></p>
+
+    <p>Array Filter with value greater than 9</p>
+    <p id="arrayFilter"></p>
+    <p>
+      charAt()<br />
+      trim()<br />
+      Array.isArray<br />
+      Array.forEach() <br />
+      Array.filter() <br />
+      Array.map() <br />
+      Array.flatMap() <br />
+      Array.reduce() find sum of all given array<br />
+      Array.reduceRight() <br />
+      Array.every()
+    </p>
     <script>
       // usestrict method
       // "use strict";
@@ -39,33 +54,84 @@
       var obj = { name: "John", new: "Doe" };
       document.getElementById("objname").innerHTML = obj.new;
 
+      //Trim word
       let text1 = "   Trimword   ";
       let text2 = text1.trim();
 
       document.getElementById("trim").innerHTML =
         "Length text1 = " + text1.length + "<br>Length text2 = " + text2.length;
 
+      //Find IsArray
       var fruits = ["Banana", "Orange", "Apple", "Mango"];
       var x = Array.isArray(fruits);
       document.getElementById("divisarray").innerHTML = x;
 
+      //For each
       var array1 = ["Kiwi", "Orange", "Apple", "Mango"];
       array1.forEach(displayName);
 
       function displayName(answer) {
         document.getElementById("foreachm").innerHTML += answer + "<br/>";
       }
+
+      //Map Array
       const numbers1 = [45, 4, 9, 16, 25];
       const numbers2 = numbers1.map(doublenumber);
-
-      // Pass a function to map
-      const map1 = numbers1.map((x) => x * 2);
-      console.log(map1);
-      document.getElementById("arraymap").innerHTML = numbers2;
-
       function doublenumber(value, index, array) {
         return value * 2;
       }
+      console.log(numbers2);
+
+      // Another arrow method to map
+      const map1 = numbers1.map((x) => x * 2); // [45, 4, 9, 16, 25]
+      console.log(map1); // output : [90, 8, 18, 32, 50]
+      document.getElementById("arraymap").innerHTML = numbers2;
+
+      //Flatmap map all elements from array and create new array
+      const myArr = [1, 2, 3, 4, 5, 6];
+      const newArr = myArr.flatMap((x) => [x, x * 10]);
+      console.log(newArr); // Output : 1,10,2,20,3,30,4,40,5,50,6,60
+
+      //Array Filter
+      const answer = numbers1.filter(agewise);
+      function agewise(value) {
+        return value > 9;
+      }
+      const ageval = numbers1.filter((x) => x > 16); //[45, 4, 9, 16, 25]
+      console.log(ageval); //Output :  [45, 25]
+
+      document.getElementById("arrayFilter").innerHTML = answer;
+      console.log(answer);
+
+      //Array.reduce()
+      const nummber3 = numbers1.reduce(sum); //[45, 4, 9, 16, 25]
+      console.log(nummber3); // Output : 99
+
+      //reduceRight()
+      const ans = numbers1.reduceRight(sum); //[45, 4, 9, 16, 25]
+      function sum(previousOutput, currentValue) {
+        return previousOutput + currentValue;
+      }
+      console.log(ans); //output: 99
+
+      //This example checks if all values are over 18
+      //every()
+      var numbers = [45, 4, 9, 16, 25];
+      var allOver18 = numbers.every(myFunction); //[45, 4, 9, 16, 25];
+
+      function myFunction(value) {
+        return value > 18;
+      }
+      console.log(allOver18); // Output : false
+
+      var nummb3 = [20, 21, 25];
+      var allOvers18 = nummb3.every(myFunction); //[20, 21, 25]
+
+      console.log(allOvers18); // Output : true
+
+      //using arrow function
+      var als = nummb3.every((x) => x > 18); //[20, 21, 25]
+      console.log(als); // Output : true
     </script>
   </body>
 </html>
