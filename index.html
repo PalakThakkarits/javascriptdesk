@@ -1,15 +1,71 @@
 <!DOCTYPE html>
 <html>
   <body>
-    <h2>My First JavaScript</h2>
+    <h2>JavaScript String Methods used in ES5</h2>
 
-    <button
-      type="button"
-      onclick="document.getElementById('demo').innerHTML = Date()"
-    >
-      Click me to display Date and Time.
-    </button>
-
+    <p>
+      The charAt() method returns the character at a given position in a string.
+    </p>
+    <p>charAt(6) for "HELLO WORLD"</p>
     <p id="demo"></p>
+
+    <p>ECMAScript 5 allows "new" reserved words as property names.</p>
+    <p id="objname"></p>
+
+    <p>The trim() trim spaces from left and right</p>
+    <p id="trim"></p>
+
+    <p>
+      The Array.isArray(fruits) method checks whether an object is an array.
+    </p>
+
+    <p id="divisarray"></p>
+
+    <p>Foreach method</p>
+    <p id="foreachm"></p>
+
+    <p>Array Map</p>
+    <p id="arraymap"></p>
+    <script>
+      // usestrict method
+      // "use strict";
+      x = 3.14; // This will cause an error because x is not declared
+
+      //charAt
+      var str = "HELLO WORLD";
+      document.getElementById("demo").innerHTML = str.charAt(6); //Output : W
+
+      //use of reserved words allows in ES 5
+      var obj = { name: "John", new: "Doe" };
+      document.getElementById("objname").innerHTML = obj.new;
+
+      let text1 = "   Trimword   ";
+      let text2 = text1.trim();
+
+      document.getElementById("trim").innerHTML =
+        "Length text1 = " + text1.length + "<br>Length text2 = " + text2.length;
+
+      var fruits = ["Banana", "Orange", "Apple", "Mango"];
+      var x = Array.isArray(fruits);
+      document.getElementById("divisarray").innerHTML = x;
+
+      var array1 = ["Kiwi", "Orange", "Apple", "Mango"];
+      array1.forEach(displayName);
+
+      function displayName(answer) {
+        document.getElementById("foreachm").innerHTML += answer + "<br/>";
+      }
+      const numbers1 = [45, 4, 9, 16, 25];
+      const numbers2 = numbers1.map(doublenumber);
+
+      // Pass a function to map
+      const map1 = numbers1.map((x) => x * 2);
+      console.log(map1);
+      document.getElementById("arraymap").innerHTML = numbers2;
+
+      function doublenumber(value, index, array) {
+        return value * 2;
+      }
+    </script>
   </body>
 </html>
