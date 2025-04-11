@@ -39,8 +39,19 @@
       Array.flatMap() <br />
       Array.reduce() find sum of all given array<br />
       Array.reduceRight() <br />
-      Array.every()
+      Array.every() <br />
+      Array.some() <br />
+      Array.indexOf()<br />
+      Array.lastIndexOf()<br />
+      JSON.parse() <br />
+      JSON.stringify()<br />
+      Getter and setter<br />
+      -----<br />
+      Object.keys() <br />
+      1. Assign Source to Target Object.assign(person1, person2);
     </p>
+    2. Object entries returns an array of the key/value pairs in an object
+    <p id="objentri"></p>
     <script>
       // usestrict method
       // "use strict";
@@ -62,16 +73,22 @@
         "Length text1 = " + text1.length + "<br>Length text2 = " + text2.length;
 
       //Find IsArray
-      var fruits = ["Banana", "Orange", "Apple", "Mango"];
+      var fruits = ["Apple", "Orange", "Apple", "Mango"];
       var x = Array.isArray(fruits);
       document.getElementById("divisarray").innerHTML = x;
 
+      let position = fruits.indexOf("Apple");
+      console.log("indexof apple is : " + position);
+
+      let position2 = fruits.lastIndexOf("Apple");
+      console.log("indexof apple is : " + position2);
       //For each
       var array1 = ["Kiwi", "Orange", "Apple", "Mango"];
       array1.forEach(displayName);
 
       function displayName(answer) {
-        document.getElementById("foreachm").innerHTML += answer + "<br/>";
+        //document.getElementById("foreachm").innerHTML += answer + "<br/>";
+        console.log(answer);
       }
 
       //Map Array
@@ -118,6 +135,8 @@
       //every()
       var numbers = [45, 4, 9, 16, 25];
       var allOver18 = numbers.every(myFunction); //[45, 4, 9, 16, 25];
+      var someover18 = numbers.some(myFunction); //[45, 4, 9, 16, 25];
+      console.log("someover18  " + someover18);
 
       function myFunction(value) {
         return value > 18;
@@ -132,6 +151,169 @@
       //using arrow function
       var als = nummb3.every((x) => x > 18); //[20, 21, 25]
       console.log(als); // Output : true
+
+      let new1 = [3, 4, 5, 6];
+      let answer1 = new1.filter(mmyfunc);
+
+      function mmyfunc(value) {
+        return value > 3;
+      }
+
+      console.log(answer1); // Output : [4, 5, 6]
+
+      //Json convert text into javascript object
+      const txt = '{"name":"John", "age":30, "city":"New York"}';
+      const person = JSON.parse(txt);
+
+      console.log(person.name); // John
+
+      //this return javascript array instead of object.
+      const myobj = '["Ford", "BMW", "Audi", "Fiat"]';
+      const myArr1 = JSON.parse(myobj);
+      console.log(myArr1); //['Ford', 'BMW', 'Audi', 'Fiat']
+
+      const text = '{"name":"John", "birth":"1986-12-14", "city":"New York"}';
+      const mobj = JSON.parse(text);
+      mobj.birth = new Date(mobj.birth);
+      console.log(mobj.birth);
+
+      date_today = new Date();
+      console.log(date_today); // prints today's date and time
+
+      // reviver function that checks each property key before returning value
+      const dobj = JSON.parse(text, function (key, value) {
+        if (key == "birth") {
+          return new Date(value);
+        } else {
+          return value;
+        }
+      });
+      console.log(dobj.birth); // return birth date
+      console.log(dobj.city); // returnn city name
+
+      //When sending data to a web server, the data has to be a string.
+      var obj = { name: "John", age: 30, city: "New York" };
+      var myJSON = JSON.stringify(obj);
+      localStorage.setItem("persondata", myJSON);
+      console.log(myJSON); // Convert object into string // {"name":"John","age":30,"city":"New York"}
+
+      //Create string from array
+      const arr = ["John", "Peter", "Sally", "Jane"];
+      const myJSONArr = JSON.stringify(arr); //["John","Peter","Sally","Jane"]
+
+      console.log(myJSONArr);
+
+      // Storing data:
+      const myObj2 = { name: "Jack", age: 20, city: "US" };
+      const myJSON2 = JSON.stringify(myObj2);
+      console.log(myJSON2); //{"name":"Jack","age":20,"city":"US"}
+      localStorage.setItem("testJSON", myJSON2);
+
+      // Retrieving data:
+      let text5 = localStorage.getItem("testJSON");
+      console.log(text5);
+      let obj5 = JSON.parse(text5);
+      console.log(obj5); //{name: 'Jack', age: 20, city: 'US'}
+      console.log(obj5.age); // output:20
+
+      //Store user data in local storage
+      const userdata = { uname: "Lisa", type: "Admin" };
+      objuser = JSON.stringify(userdata);
+      //console.log(objuser);
+      localStorage.setItem("userdata", objuser);
+
+      //stringify convert boolean into string
+      let bool = new Boolean(1);
+      const mybJSON = JSON.stringify(bool);
+      console.log(mybJSON);
+
+      const obj2 = {
+        name: "Zeel",
+        age: function () {
+          return 30;
+        },
+        city: "New York",
+      };
+      obj2.age = obj2.age.toString();
+      // console.log(obj2);
+      const myJSO = JSON.stringify(obj2);
+      console.log(myJSO);
+
+      //Getter and setter
+      // Create an object:
+      var person2 = {
+        firstName: "John",
+        lastName: "Doe",
+        lang: "",
+        get fullName() {
+          return this.firstName + " " + this.lastName;
+        },
+
+        set language(val) {
+          this.lang = val.toUpperCase();
+        },
+        set fname(val) {
+          this.firstName = val;
+        },
+      };
+      person2.language = "en";
+      person2.fname = "Luis";
+      console.log(person2.fullName); //Luis Doe
+      console.log(person2.lang); //EN
+      console.log(person2.firstName); //Luis
+
+      // Create an object:
+      var person2 = {
+        firstName: "John",
+        lastName: "Doe",
+        language: "",
+      };
+      // Change a Property:
+      Object.defineProperty(person2, "firstName", {
+        get: function () {
+          return firstName;
+        },
+        set: function (val) {
+          firstName = val.toUpperCase();
+        },
+      });
+
+      person2.firstName = "jack";
+      console.log(person2.firstName); // JACK
+
+      //Object.keys() returns an array with the keys of an object
+      // Create an Object
+      const person3 = {
+        firstName: "John",
+        lastName: "Doe",
+        age: 50,
+        eyeColor: "blue",
+      };
+
+      // Get the Keys
+      const keys = Object.keys(person3);
+      console.log(keys); //  ['firstName', 'lastName', 'age', 'eyeColor']
+
+      // Object Properties
+      // Create Source Object
+      const person4 = { firstName: "Anne", lastName: "Smith" };
+
+      // Assign
+      Object.assign(person3, person4);
+      console.log(person3); // {firstName: 'Anne', lastName: 'Smith', age: 50, eyeColor: 'blue'}
+
+      const getentry = Object.entries(person4); //firstName,Anne,lastName,Smith
+
+      document.getElementById("objentri").innerHTML = getentry;
+      console.log(getentry);
+
+      const userlist = [
+        ["admin", "10"],
+        ["staff", "30"],
+        ["other", "40"],
+      ];
+      const myOb3 = Object.fromEntries(userlist);
+      console.log(myOb3.admin); // Output : 10
     </script>
   </body>
 </html>
